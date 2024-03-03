@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from 'react';
-import List from "./components/list.jsx";
+import List from "./components/List.jsx";
+import Button from "./components/Button.jsx";
 
 const list = [{
 	title: "title 123",
@@ -21,6 +21,8 @@ export function App() {
 					<List key={index} name={name} title={title}/>
 				)}
 			</ul>
+
+			<Button type={{color:'red'}}>Название любое</Button>
 		</div>
 	);
 }
