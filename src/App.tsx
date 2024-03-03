@@ -10,8 +10,17 @@ const list = [{
 }];
 
 function App() {
+    // const str = 'string';
+    // const num = 2;
+    // const obj = {};
+    // const arr = [];
+    // const null = null;
+    // const sym = Symbol();
+    // const und = undefined;
+    // const _void = void 0;
+    // const bool = true;
+    // const fn = () => {};
 
-    console.log(333)
 
     return (
         <div>
