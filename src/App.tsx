@@ -10,6 +10,9 @@ const list = [{
 }];
 
 function App() {
+
+    console.log(333)
+
     return (
         <div>
             APP
