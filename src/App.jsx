@@ -16,9 +16,9 @@ export function App() {
 			APP
 			<ul>
 				{list.map((
-					el,
+					{name, title},
 					index) =>
-					<List key={index} el={el}/>
+					<List key={index} name={name} title={title}/>
 				)}
 			</ul>
 		</div>

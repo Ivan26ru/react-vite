@@ -1,11 +1,10 @@
 import React from 'react';
 
-const List = (props) => {
-	console.log(props.index)
+const List = ({name, title}) => {
 	return (
 		<li>
-			<div>{props.el.name}</div>
-			<div>{props.el.title}</div>
+			<div>{name}</div>
+			<div>{title}</div>
 		</li>
 	)
 };
