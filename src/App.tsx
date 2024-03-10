@@ -68,34 +68,34 @@ function App() {
 //
 //     const val3 = ApiAnswer.randomkey; // ожидает строку
 
-    enum Methods {
-        add,
-        sub,
-    }
-
-    function calculate(method: Methods, left: number, right: number): number {
-        switch (method) {
-            case Methods.add:
-                return left + right;
-            case Methods.sub:
-                return left - right;
-        }
-    }
-
-    const sum = calculate(Methods.sub, 2, 3);
-
-    type TypeFn = () => number
-
-    type StrangeTsTypes = any | unknown | never;
-
-    const some: any = '2';
-
-    const un: unknown = '2';
-
-    function neverFn(): never{
-        throw new Error('myexception');
-    }
-    some.reduce()
+    // enum Methods {
+    //     add,
+    //     sub,
+    // }
+    //
+    // function calculate(method: Methods, left: number, right: number): number {
+    //     switch (method) {
+    //         case Methods.add:
+    //             return left + right;
+    //         case Methods.sub:
+    //             return left - right;
+    //     }
+    // }
+    //
+    // const sum = calculate(Methods.sub, 2, 3);
+    //
+    // type TypeFn = () => number
+    //
+    // type StrangeTsTypes = any | unknown | never;
+    //
+    // const some: any = '2';
+    //
+    // const un: unknown = '2';
+    //
+    // function neverFn(): never{
+    //     throw new Error('myexception');
+    // }
+    // some.reduce()
 
     return (
         <div>
