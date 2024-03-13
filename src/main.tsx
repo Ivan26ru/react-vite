@@ -6,6 +6,7 @@ let terms = [];
 
 function addTerm(title, description) {
     terms.push({
+        id: crypto.randomUUID(),
         title,
         description
     });
