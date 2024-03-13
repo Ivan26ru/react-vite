@@ -1,10 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.scss'
+import './index.scss';
+import {TermCard} from "./TermCard.tsx";
+import {createRoot} from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>,
-)
+const descriptionList = document.getElementById('description-list');
+const reactRoot = createRoot(descriptionList);
+reactRoot.render(<TermCard/>);
+
+const form = document.getElementById('add-description');
+
+form.addEventListener('submit', (event) => {
+    // Отменяем поведение по умолчанию
+    event.preventDefault();
+
+    // Получаем значения полей формы
+    const title = form.elements['title'].value;
+    const description = form.elements['description'].value;
+
+    // Сбрасываем форму
+    form.reset();
+
+    // Выводим термин в консоль
+    console.log(title, description);
+});
