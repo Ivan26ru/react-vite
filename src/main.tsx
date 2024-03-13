@@ -2,9 +2,22 @@ import './index.scss';
 import {createRoot} from "react-dom/client";
 import {TermList} from "./TermList.tsx";
 
+let terms = [];
+
+function addTerm(title, description) {
+    terms.push({
+        title,
+        description
+    });
+
+    terms.sort((term1, term2) => (term1.title < term2.title ? -1 : 1));
+
+    reactRoot.render(<TermList terms={terms}/>);
+}
+
 const descriptionList = document.getElementById('description-list');
 const reactRoot = createRoot(descriptionList);
-reactRoot.render(<TermList/>);
+reactRoot.render(<TermList terms={terms}/>);
 
 const form = document.getElementById('add-description');
 
@@ -19,6 +32,5 @@ form.addEventListener('submit', (event) => {
     // Сбрасываем форму
     form.reset();
 
-    // Выводим термин в консоль
-    console.log(title, description);
+    addTerm(title, description);
 });
