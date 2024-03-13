@@ -1,8 +1,10 @@
-export const TermCard = () => {
+import "./TermCard.scss";
+
+export const TermCard = ({title, description}) => {
     return (
-        <div>
-            <h2>React</h2>
-            <p>Библиотека для создания пользовательских интерфейсов</p>
+        <div className="term-card">
+            <h2 className="term-card__title">{title}</h2>
+            <p className="term-card__description">{description}</p>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import './index.scss';
-import {TermCard} from "./TermCard.tsx";
 import {createRoot} from "react-dom/client";
+import {TermList} from "./TermList.tsx";
 
 const descriptionList = document.getElementById('description-list');
 const reactRoot = createRoot(descriptionList);
-reactRoot.render(<TermCard/>);
+reactRoot.render(<TermList/>);
 
 const form = document.getElementById('add-description');
 
