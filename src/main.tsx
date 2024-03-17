@@ -2,7 +2,20 @@ import './index.scss';
 import {createRoot} from "react-dom/client";
 import {TermList} from "./TermList.tsx";
 
-let terms = [];
+function saveTermList(terms) {
+    localStorage.setItem("termList", JSON.stringify(terms));
+}
+
+function restoreLIst() {
+    const rawTermList = localStorage.getItem("termList");
+    if (!rawTermList) {
+        return [];
+    }
+
+    return JSON.parse(rawTermList);
+}
+
+let terms = restoreLIst();
 
 function addTerm(title, description) {
     terms.push({
@@ -13,12 +26,23 @@ function addTerm(title, description) {
 
     terms.sort((term1, term2) => (term1.title < term2.title ? -1 : 1));
 
-    reactRoot.render(<TermList terms={terms}/>);
+    syncTermList()
+}
+
+function syncTermList() {
+    saveTermList(terms)
+    reactRoot.render(<TermList terms={terms} onDelete={deleteItem}/>);
+}
+
+function deleteItem(id) {
+    terms = terms.filter(term => term.id !== id);
+    syncTermList()
 }
 
 const descriptionList = document.getElementById('description-list');
 const reactRoot = createRoot(descriptionList);
-reactRoot.render(<TermList terms={terms}/>);
+
+syncTermList();
 
 const form = document.getElementById('add-description');
 
