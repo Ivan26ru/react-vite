@@ -12,7 +12,7 @@ export const SearchableList = ({list}) => {
 
 	return (
 		<div>
-			<label htmlFor="">
+			<label htmlFor="">Фильтр:
 				<input type="text" value={searchString} onChange={handleSeaarch}/>
 			</label>
 			<ul>

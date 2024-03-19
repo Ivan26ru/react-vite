@@ -1,6 +1,7 @@
 import './App.css'
 import {SearchableList} from "./SearchableList.jsx";
 import {FocusableInput} from "./FocusableInput.jsx";
+import {Stopwatch} from "./Stopwatch.jsx";
 
 const list = [
 	{
@@ -19,11 +20,13 @@ const list = [
 function App() {
 	return (
 		<>
+			<SearchableList list={list}/>
+			<hr/>
 			<FocusableInput/>
 			<hr/>
-			<SearchableList list={list}/>
+			<Stopwatch/>
 		</>
-	)
+	);
 }
 
 export default App
