@@ -1,5 +1,6 @@
 import './App.css'
 import {SearchableList} from "./SearchableList.jsx";
+import {FocusableInput} from "./FocusableInput.jsx";
 
 const list = [
 	{
@@ -17,7 +18,11 @@ const list = [
 ]
 function App() {
 	return (
+		<>
+			<FocusableInput/>
+			<hr/>
 			<SearchableList list={list}/>
+		</>
 	)
 }
 
