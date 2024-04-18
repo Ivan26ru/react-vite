@@ -1,5 +1,6 @@
 import {z} from 'zod'
-import {PostList} from "./Post.ts";
+import {PostList} from "./Post";
+import {useEffect, useState} from "react";
 
 export const UserSchema = z.object({
     id: z.string(),
@@ -41,5 +42,30 @@ type RequestState =
     | ErrorRequestState;
 
 export function usePostList() {
-    const [] = useState({ status: "Idle" });
+    const [state, setState] = useState<RequestState>({status: "Idle"});
+
+    useEffect(() => {
+        if (state.status === "pending") {
+            fetchPostList()
+                .then((data) => {
+                    setState({status: "success", data: data.list})
+                })
+                .catch((error) => {
+                    setState({status: "Error", data: error});
+                });
+        }
+    }, [state]);
+
+    useEffect(() => {
+        setState({status: "pending"});
+    }, []);
+
+    const refetch = () => {
+        setState({status: "pending"});
+    }
+
+    return {
+        state,
+        refetch,
+    };
 }
