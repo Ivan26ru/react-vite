@@ -23,20 +23,20 @@ type FetchPostListResponse = z.infer<typeof FetchPostListSchema>;
 // состояния запросов
 
 interface IdleRequestState {
-    status: "Idle";
+    status: "idle";
 }
 
 interface LoadingRequestState {
-    status: "Pending";
+    status: "pending";
 }
 
 interface SuccessRequestState {
-    status: "Success";
+    status: "success";
     data: PostList;
 }
 
 interface ErrorRequestState {
-    status: "Error";
+    status: "error";
     data: unknown;
 }
 
@@ -52,7 +52,7 @@ export function usePostList() {
     const [state, setState] = useState<RequestState>({status: "Idle"});
 
     useEffect(() => {
-        if (state.status === "Pending") {
+        if (state.status === "pending") {
             fetchPostList()
                 .then((data) => {
                     setState({status: "Success", data: data.list})
@@ -64,11 +64,11 @@ export function usePostList() {
     }, [state]);
 
     useEffect(() => {
-        setState({status: "Pending"});
+        setState({status: "pending"});
     }, []);
 
     const refetch = () => {
-        setState({status: "Pending"});
+        setState({status: "pending"});
     }
 
     return {
