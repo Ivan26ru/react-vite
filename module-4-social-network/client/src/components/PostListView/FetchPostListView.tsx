@@ -4,15 +4,14 @@ import {PostListView} from "./PostListView";
 
 export const FetchPostListView = () => {
     const {state, refetch} = usePostList();
-    return <div>d2sfa</div>;
 
     switch (state.status) {
-        case "idle":
-        case "pending":
+        case "Idle":
+        case "Pending":
             return <Loader/>;
-        case "success":
+        case "Success":
             return <PostListView postList={state.data}/>;
-        case "error":
+        case "Error":
             return (
                 <div>
                     <span>Произошла ошибка :(</span>
