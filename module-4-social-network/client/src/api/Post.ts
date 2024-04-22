@@ -50,16 +50,16 @@ type RequestState =
 
 
 export function usePostList() {
-    const [state, setState] = useState<RequestState>({status: "Idle"});
+    const [state, setState] = useState<RequestState>({status: "idle"});
 
     useEffect(() => {
         if (state.status === "pending") {
             fetchPostList()
                 .then((data) => {
-                    setState({status: "Success", data: data.list})
+                    setState({status: "success", data: data.list})
                 })
-                .catch((error) => {
-                    setState({status: "Error", data: error});
+                .catch((error: Error) => {
+                    setState({status: "error", data: error});
                 });
         }
     }, [state]);
