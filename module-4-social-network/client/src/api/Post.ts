@@ -1,4 +1,6 @@
 import {z} from "zod";
+import {useEffect, useState} from "react";
+import {validateReponse} from "./validateResponse.ts";
 
 const PostSchema = z.object({
     id: z.string(),
@@ -18,8 +20,80 @@ export const FetchPostListSchema = z.object({
 
 type FetchPostListResponse = z.infer<typeof FetchPostListSchema>;
 
-function fetchPostList(): Promise<FetchPostListResponse> {
+
+// состояния запросов
+
+interface IdleRequestState {
+    status: "idle";
+}
+
+interface LoadingRequestState {
+    status: "pending";
+}
+
+interface SuccessRequestState {
+    status: "success";
+    data: PostList;
+}
+
+interface ErrorRequestState {
+    status: "error";
+    data: unknown;
+}
+
+type RequestState =
+    | IdleRequestState
+    | LoadingRequestState
+    | SuccessRequestState
+    | ErrorRequestState;
+
+
+
+export function usePostList() {
+    const [state, setState] = useState<RequestState>({status: "idle"});
+
+    useEffect(() => {
+        if (state.status === "pending") {
+            fetchPostList()
+                .then((data) => {
+                    setState({status: "success", data: data.list})
+                })
+                .catch((error: Error) => {
+                    setState({status: "error", data: error});
+                });
+        }
+    }, [state]);
+
+    useEffect(() => {
+        setState({status: "pending"});
+    }, []);
+
+    const refetch = () => {
+        setState({status: "pending"});
+    }
+
+    return {
+        state,
+        refetch,
+    };
+}
+
+export function fetchPostList(): Promise<FetchPostListResponse> {
     return fetch("/api/posts")
         .then((response) => response.json())
         .then((data) => FetchPostListSchema.parse(data));
+}
+
+export function createPost(text: string): Promise<void>{
+    return fetch("/api/posts", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            text,
+        }),
+    })
+        .then(validateReponse)
+        .then(()=>undefined)
 }

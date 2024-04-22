@@ -1,5 +1,5 @@
 import {z} from 'zod'
-import {PostList} from "./Post.ts";
+import {validateReponse} from "./validateResponse.ts";
 
 export const UserSchema = z.object({
     id: z.string(),
@@ -14,32 +14,32 @@ export function fetchUser(id: string): Promise<User> {
         .then((data) => UserSchema.parse(data));
 }
 
-// состояния запросов
-
-interface IdleRequestState {
-    status: "Idle";
+   export function registerUser(username: string, password: string): Promise<void> {
+    return fetch("/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({username, password})
+    }).then(() => undefined);
 }
 
-interface LoadingRequestState {
-    status: "Loading";
+
+export function login(username: string, password:string):Promise<void>{
+    return fetch("/api/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({username, password}),
+    })
+        .then(validateReponse)
+        .then(()=>undefined)
 }
 
-interface SuccessRequestState {
-    status: "Success";
-    data: PostList;
-}
-
-interface ErrorRequestState {
-    status: "Error";
-    data: unknown;
-}
-
-type RequestState =
-    | IdleRequestState
-    | LoadingRequestState
-    | SuccessRequestState
-    | ErrorRequestState;
-
-export function usePostList() {
-    const [] = useState({ status: "Idle" });
+export function fetchMe(): Promise<User>{
+    return fetch("/api/users/me")
+        .then(validateReponse)
+        .then(response => response.json())
+        .then(data => UserSchema.parse(data));
 }
