@@ -1,33 +1,35 @@
-import { USERS } from "../../data";
+import {USERS} from "../../data";
 import "./UserInfoPage.css";
-import { IUserInfoPageProps } from "./interfaces";
+import {useParams} from "react-router-dom";
 
-export function UserInfoPage({ userId }: IUserInfoPageProps) {
-	const user = USERS[Number(userId)];
+export function UserInfoPage() {
 
-	if (!user) {
-		return (
-			<div className="userInfoPage">
-				<h2>UserInfoPage</h2>
+    const {userId} = useParams();
+    const user = USERS[Number(userId)];
 
-				<div className="users">
-					<p>Пользоатвеля с таким ИД нет</p>
-				</div>
-			</div>
-		);
-	}
+    if (!user) {
+        return (
+            <div className="userInfoPage">
+                <h2>UserInfoPage</h2>
 
-	return (
-		<div className="userInfoPage">
-			<h2>UserInfoPage</h2>
+                <div className="users">
+                    <p>Пользователя с таким ИД нет</p>
+                </div>
+            </div>
+        );
+    }
 
-			<div className="users">
-				<p>{user.jobTitle}</p>
-				<p>{user.email}</p>
-				<img src={user.avatar} alt="" width={200} height={200} />
-				<p>{user.fullName}</p>
-				<p>{user.bio}</p>
-			</div>
-		</div>
-	);
+    return (
+        <div className="userInfoPage">
+            <h2>UserInfoPage</h2>
+
+            <div className="users">
+                <p>{user.jobTitle}</p>
+                <p>{user.email}</p>
+                <img src={user.avatar} alt="" width={200} height={200}/>
+                <p>{user.fullName}</p>
+                <p>{user.bio}</p>
+            </div>
+        </div>
+    );
 }
