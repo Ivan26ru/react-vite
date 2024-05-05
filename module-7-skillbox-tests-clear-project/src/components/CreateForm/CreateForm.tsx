@@ -21,6 +21,7 @@ export const CreateForm = ({
   name,
   size,
   dough,
+  disabled,
   ingredientsIds,
   handleDough,
   handleIngredients,
@@ -78,7 +79,7 @@ export const CreateForm = ({
       </div>
 
       <div className="form-line">
-        <button data-testid="CreateButton" type="submit" className="create-button">Создать</button>
+        <button data-testid="CreateButton" type="submit" className="create-button" disabled={disabled}>Создать</button>
       </div>
     </form>
   )
