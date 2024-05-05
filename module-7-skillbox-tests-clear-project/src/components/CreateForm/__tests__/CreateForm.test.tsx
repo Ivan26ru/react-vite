@@ -2,8 +2,8 @@ import '@testing-library/jest-dom';
 import {fireEvent, render} from "@testing-library/react";
 import {CreateForm} from "..";
 import {TDough, TSize} from "../../../types/pizza";
-import {getCurrentTime} from "../../../utils/getCurrentTime.ts";
-import {sendAnalytics} from "../../../utils/sendAnalytics.ts";
+import {getCurrentTime} from "../../../utils/getCurrentTime";
+import {sendAnalytics} from "../../../utils/sendAnalytics";
 
 const handleNameChangeMock = jest.fn();
 const handleSizeMock = jest.fn();
@@ -59,9 +59,9 @@ describe('CreateForm', () => {
 
     it('Проверяем, что аналитика получает верные данные', async () => {
         (getCurrentTime as jest.Mock).mockReturnValue(111);
-        const {getByTestId} = renderComponent(());
+        const {getByTestId} = renderComponent();
 
-        await fireEvent.input(getByTestId('NameInput'), {target:{value: 'супер пицца'}})
+        await fireEvent.input(getByTestId('NameInput'), {target: {value: 'супер пицца'}})
         await fireEvent.click(getByTestId('CreateButton'));
 
         expect(sendAnalytics).toBeCalledWith({
