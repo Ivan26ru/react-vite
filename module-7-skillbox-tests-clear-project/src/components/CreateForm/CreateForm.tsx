@@ -21,7 +21,6 @@ export const CreateForm = ({
   name,
   size,
   dough,
-  disabled,
   ingredientsIds,
   handleDough,
   handleIngredients,
@@ -36,7 +35,7 @@ export const CreateForm = ({
           Название:
           <input data-testid="NameInput" onChange={handleNameChange} value={name} type="text" />
         </label>
-        
+
       </div>
 
       <div className="form-line">
@@ -81,6 +80,6 @@ export const CreateForm = ({
       <div className="form-line">
         <button data-testid="CreateButton" type="submit" className="create-button">Создать</button>
       </div>
-    </form>  
+    </form>
   )
 };
