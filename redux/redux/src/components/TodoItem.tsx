@@ -14,10 +14,10 @@ const TodoItem = ({
                 <input type="checkbox" checked={completed} onChange={() => dispatch(toggleComplete({id}))}/>
                 <span>{text}</span>
             </label>
-            <span style={{
+            <a style={{
                 color: 'red',
                 cursor: "pointer"
-            }} onClick={() => dispatch(removeTodo({id}))}>&times;</span>
+            }} onClick={() => dispatch(removeTodo({id}))}>&times;</a>
         </li>
     )
 }
