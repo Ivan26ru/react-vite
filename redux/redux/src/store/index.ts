@@ -3,9 +3,9 @@ import todoReducer from "./todoSlice.ts"
 
 export default configureStore
 ({
-    reducer: {
-        todos:todoReducer
+        reducer: {
+            todos: todoReducer
+        }
     }
-}
 
 )
