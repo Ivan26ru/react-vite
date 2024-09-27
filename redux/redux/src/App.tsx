@@ -25,7 +25,7 @@ function App() {
     return (
         <>
             <InputField text={text} handleInput={setText} handleSubmit={addTask}/>
-            {/*<TodoList/>*/}
+            <TodoList/>
             <div>
                 <ul>
                     {data.map(item => (
