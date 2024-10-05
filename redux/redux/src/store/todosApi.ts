@@ -17,7 +17,7 @@ export const todosApi = createApi({
                     ]
                     : [{type: 'Todos', id: 'LIST'}],
         }),
-        addProduct: build.mutation({
+        addTodo: build.mutation({
             query: (body) => ({
                 url: 'todos',
                 method: 'POST',
@@ -37,6 +37,6 @@ export const todosApi = createApi({
 
 export const {
     useGetTodosQuery,
-    useAddProductMutation,
+    useAddTodoMutation,
     useDeleteTodoMutation
 } = todosApi;

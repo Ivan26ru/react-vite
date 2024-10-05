@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import TodoList from "./components/TodoList.tsx";
 
-import {useGetTodosQuery, useAddProductMutation, useDeleteTodoMutation} from "./store/todosApi";
+import {useGetTodosQuery, useAddTodoMutation, useDeleteTodoMutation} from "./store/todosApi";
 
 import './App.css';
 
@@ -18,7 +18,7 @@ function App() {
     const [count, setCount] = useState(10);
     const [newTodo, setNewTodo] = useState('');
     const {data = [], isLoading} = useGetTodosQuery(count);
-    const [addTodo, {isError}] = useAddProductMutation();
+    const [addTodo, {isError}] = useAddTodoMutation();
 
     const [deleteTodo] = useDeleteTodoMutation();
 
