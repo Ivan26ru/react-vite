@@ -24,8 +24,19 @@ export const todosApi = createApi({
                 body
             }),
             invalidatesTags: [{type: 'Todos', id: 'LIST'}]
+        }),
+        deleteTodo: build.mutation({
+            query: (id) => ({
+                url: `todos/${id}`,
+                method: `DELETE`,
+            }),
+            invalidatesTags: [{type: 'Todos', id: 'LIST'}]
         })
     })
 });
 
-export const {useGetTodosQuery, useAddProductMutation} = todosApi;
+export const {
+    useGetTodosQuery,
+    useAddProductMutation,
+    useDeleteTodoMutation
+} = todosApi;

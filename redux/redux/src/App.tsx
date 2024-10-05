@@ -1,10 +1,7 @@
 import {useState} from 'react';
-import {useDispatch} from "react-redux";
 import TodoList from "./components/TodoList.tsx";
-import InputField from "./components/InputField.tsx";
-import {addTodo} from "./store/todoSlice.ts";
 
-import {useGetTodosQuery, useAddProductMutation} from "./store/todosApi";
+import {useGetTodosQuery, useAddProductMutation, useDeleteTodoMutation} from "./store/todosApi";
 
 import './App.css';
 
@@ -23,13 +20,19 @@ function App() {
     const {data = [], isLoading} = useGetTodosQuery(count);
     const [addTodo, {isError}] = useAddProductMutation();
 
+    const [deleteTodo] = useDeleteTodoMutation();
+
+    const handleDeleteTodo = async (id) => {
+        await deleteTodo(id).unwrap();
+    }
     const handleAddTodo = async () => {
         if (newTodo) {
             await addTodo(
                 {
                     title: newTodo,
-                    body:'test',
-                    userId:1}
+                    body: 'test',
+                    userId: 1
+                }
             ).unwrap();
             console.log(newTodo)
             setNewTodo('');
@@ -46,10 +49,7 @@ function App() {
             {/*    handleInput={setText} */}
             {/*    handleSubmit={addTask}*/}
             {/*/>*/}
-            <input type="text"
-            value={newTodo}
-            onChange={(e)=>setNewTodo(e.target.value)}
-            />
+            <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)}/>
             <button onClick={handleAddTodo}>Add todo</button>
             <TodoList/>
 
@@ -62,7 +62,7 @@ function App() {
             <div>
                 <ul>
                     {data.map(item => (
-                        <li key={item.id}>
+                        <li key={item.id} onClick={() => handleDeleteTodo(item.id)}>
                             {item.title}
                         </li>
                     ))}
